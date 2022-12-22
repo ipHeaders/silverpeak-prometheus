@@ -41,7 +41,7 @@ Required Environments Variables
 ~~~~~~~~~~~~~~~~~~~~
 
 Optional Environments Variables
-##### If the following environment variables are not defined at lunch then they must be in the vars.yml file
+##### If the following environment variables are not defined at launch then they must be in the vars.yml file
 ~~~~~~~~~~~~~~~~~~~~
 * SP_PORT
 * SP_ORCH_URL
