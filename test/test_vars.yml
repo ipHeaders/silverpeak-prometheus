@@ -1,0 +1,13 @@
+
+
+config:
+   exporter:
+      port: 8000
+   silverpeak:
+      verify_ssl: True
+
+
+orchestrator:
+   collect: True
+   interval: 30
+   

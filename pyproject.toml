@@ -1,0 +1,43 @@
+[tool.poetry]
+name = "silverpeak_exporter"
+version = "0.1.1"
+description = "Prometheus exporter for Silverpeak SD-WAN Appliances."
+authors = ["IP Headers <ipHeaders@users.noreply.github.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "silverpeak_exporter"}]
+
+[tool.poetry.scripts]
+spexporter = 'silverpeak_exporter.main:main'
+
+[tool.poetry.dependencies]
+python = "^3.9"
+requests = "2.28.1"
+PyYAML = "6.0"
+prometheus-client = "0.15.0"
+pyedgeconnect = "0.15.3a1.dev0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py39', 'py310','py311']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | terraform/.terraform
+  | buck-out
+  | build
+  | dist
+)/
+'''
