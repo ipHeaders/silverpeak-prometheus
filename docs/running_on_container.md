@@ -1,6 +1,6 @@
 Getting Started
 ---------------
-#### Requierements
+#### Requirements
 ~~~~~~~~~~~~~~~~~~~~
 * User with API KEY
 ~~~~~~~~~~~~~~~~~~~~
