@@ -22,7 +22,7 @@ The only required environment variable is the **SP_FILE_PATH**, the rest can be 
 | SP_FILE_PATH  | **True**  |
 | SP_PORT  | False  |
 | SP_ORCH_URL  |  False |
-| SP_ORCH_KEY  | False  |
+| SP_ORCH_KEY  | **True**  |
 | SP_ORCH_SSL  |  False | |
  
 ** Example of setting environment variables **

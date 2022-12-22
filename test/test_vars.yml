@@ -4,6 +4,7 @@ config:
    exporter:
       port: 8000
    silverpeak:
+      orch: orch.silverpeak.cloud
       verify_ssl: True
 
 
