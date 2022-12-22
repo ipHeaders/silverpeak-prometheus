@@ -1,12 +1,15 @@
-
+# This is an example vars.yml configuration file. 
+# Please note that if you set some of this settings via environment variable or cli flag they dont need to be here.
 
 config:
    exporter:
-      port: 8000
+      port: 8000 # Not needed if set via environment variable or cli flag
    silverpeak:
+      orch: orch.silverpeak.cloud # Not needed if set via environment variable or cli flag
       verify_ssl: True
 
 
+# Below this point we set how the exporter collects the data and how often.
 orchestrator:
    collect: True
    interval: 30

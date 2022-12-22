@@ -1,3 +1,10 @@
+![Release](https://img.shields.io/github/v/tag/ipHeaders/silverpeak-prometheus)
+![License](https://img.shields.io/github/license/ipHeaders/silverpeak-prometheus)
+![Open Issues](https://img.shields.io/github/issues/ipHeaders/silverpeak-prometheus)
+![](https://img.shields.io/github/languages/top/ipHeaders/silverpeak-prometheus)
+![](https://img.shields.io/pypi/pyversions/silverpeak-exporter)
+![Docker Pulls](https://img.shields.io/docker/pulls/ipheaders/silverpeak-prometheus)
+
 # silverpeak-prometheus-exporter
 Silverpeak/Aruba SD-WAN Prometheus Exporter, this tool is to query the Silverpeal/Aruba SD-WAN orchestrator export the metrics to a prometheus database.
 

@@ -1,6 +1,6 @@
 Getting Started
 ---------------
-#### Requierements
+#### Requirements
 ~~~~~~~~~~~~~~~~~~~~
 * User with API KEY
 ~~~~~~~~~~~~~~~~~~~~
@@ -37,6 +37,7 @@ docker run -d -v /home/user/vars.yml:/opt/vars/ \
 Required Environments Variables
 ~~~~~~~~~~~~~~~~~~~~
 * SP_FILE_PATH
+* SP_ORCH_KEY
 ~~~~~~~~~~~~~~~~~~~~
 
 Optional Environments Variables
@@ -44,6 +45,5 @@ Optional Environments Variables
 ~~~~~~~~~~~~~~~~~~~~
 * SP_PORT
 * SP_ORCH_URL
-* SP_ORCH_KEY
 * SP_ORCH_SSL
 ~~~~~~~~~~~~~~~~~~~~
