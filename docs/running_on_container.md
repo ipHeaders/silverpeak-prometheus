@@ -9,7 +9,7 @@ On the server running docker engine create a yml file with the custom vars for t
 ~~~~~~~~~~~~~~~~~~~~
 config:
    exporter:
-      port: 8000
+      port: 15693
    silverpeak:
       verify_ssl: True
 
@@ -23,12 +23,12 @@ Use the following command as an example to map the folder where the vars are loc
 
 ~~~~~~~~~~~~~~~~~~~~
 docker run -d -v /home/user/vars.yml:/opt/vars/ \
-    -e 'SP_PORT=8000' \
+    -e 'SP_PORT=15693' \
     -e 'SP_ORCH_URL=orch.silverpeak.cloud' \
     -e 'SP_ORCH_KEY=XXXXXXXXXXXX' \
     -e 'SP_ORCH_SSL=True' \
     -e 'SP_FILE_PATH=/opt/vars/vars.yml' \
-    -p 8000:8000 \
+    -p 15693:15693 \
     --restart=unless-stopped \
     ipheaders/silverpeak-prometheus:latest
 ~~~~~~~~~~~~~~~~~~~~

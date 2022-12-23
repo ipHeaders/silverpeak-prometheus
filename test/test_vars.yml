@@ -3,7 +3,7 @@
 
 config:
    exporter:
-      port: 8000 # Not needed if set via environment variable or cli flag
+      port: 15693 # Not needed if set via environment variable or cli flag
    silverpeak:
       orch: orch.silverpeak.cloud # Not needed if set via environment variable or cli flag
       verify_ssl: True

@@ -28,7 +28,7 @@ The only required environment variable is the **SP_FILE_PATH**, the rest can be 
  
 ** Example of setting environment variables **
 ```
-export SP_PORT=8000
+export SP_PORT=15693
 export SP_ORCH_URL=orch.silverpeak.cloud
 export SP_ORCH_KEY=XXXXXXXXXXXX
 export SP_ORCH_SSL=True
@@ -45,7 +45,7 @@ Below is an example of a successful exporter launch.
  
 ```
 ╰─➤  spexporter
-2022-12-22 14:56:47,245 - silverpeak-prometheus - INFO - starting prometheus exporter on 8000
+2022-12-22 14:56:47,245 - silverpeak-prometheus - INFO - starting prometheus exporter on 15693
 2022-12-22 14:56:47,245 - silverpeak-prometheus - INFO - starting orchestrator metric collection on orch.silverpeak.cloud
 2022-12-22 14:56:47,245 - silverpeak-prometheus - INFO - starting orchestrator metric collection every 30 seconds
 ```
@@ -61,13 +61,13 @@ spexporter -h
 Below is an example of how to start the tool passing cli flags.
  
 ```
-╰─➤  spexporter --file-path /path/to/vars.yml --orch orch.silverpeak.cloud --key 123123 --port 8000
+╰─➤  spexporter --file-path /path/to/vars.yml --orch orch.silverpeak.cloud --key 123123 --port 15693
  
-2022-12-22 14:56:47,245 - silverpeak-prometheus - INFO - starting prometheus exporter on 8000
+2022-12-22 14:56:47,245 - silverpeak-prometheus - INFO - starting prometheus exporter on 15693
 2022-12-22 14:56:47,245 - silverpeak-prometheus - INFO - starting orchestrator metric collection on orch.silverpeak.cloud
 2022-12-22 14:56:47,245 - silverpeak-prometheus - INFO - starting orchestrator metric collection every 30 seconds
 ```
  
 ### Checking exposed metrics
-To check that the exporter is up and running and the exporter metrics go to http://localhost:8000
-Note if you use a different port besides 8000 change that accordingly.
+To check that the exporter is up and running and the exporter metrics go to http://localhost:15693
+Note if you use a different port besides 15693 change that accordingly.
