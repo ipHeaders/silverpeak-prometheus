@@ -6,7 +6,9 @@ from .logger import log,logToFile
 from .utls import confirmReturn,errorHandler
 from .metrics import *
 
-
+#--------------------------------------------------#
+# Metrics Collections for the Orchestrator
+#--------------------------------------------------#
 class collectOrchestratorMetrics():
     def __init__(self,url,key,verify_ssl,interval,debug, Break):
         self.url = url
@@ -136,3 +138,8 @@ class collectOrchestratorMetrics():
     def _test(self):
         orch_return = self.orch.get_portal_services_status() 
         return orch_return
+
+
+#--------------------------------------------------#
+# Metrics Collections for the Appliances
+#--------------------------------------------------#
