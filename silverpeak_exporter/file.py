@@ -146,3 +146,13 @@ class settings():
             out.update({"interval" : 60})
 
         return out
+
+    def metricsAppliance(self):
+        out = {}
+        try:
+            out.update({"appliances" : self.config['appliances']})
+        except Exception as error:
+         #   log().error(error)
+            out.update({"appliances" : []})
+
+        return out
