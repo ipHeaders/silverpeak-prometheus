@@ -38,5 +38,5 @@ cloudPortalServices = Gauge('cloudPortalServices', 'silverpeak cloud portal serv
 applianceAlarm = Gauge('applianceAlarm', 'summary of active alarms for given appliance',['applianceName','severity'])
 applianceCPU = Gauge('applianceCPU', 'cpu utilization in porcentage for each appliance core',['applianceName','cpu_core','metric'])
 applianceDiskUsage = Gauge('applianceDiskUsage', 'appliance disk utilization for each mount point',['applianceName','mount','metric'])
-applianceRebootRequiered = Enum('applianceRebootRequiered', 'Check with appliance if a reboot is required from changes',['applianceName'], states=['True', 'False'])
-applianceMemory = Gauge('applianceMemory', 'Get appliance memory related information',['applianceName','metric'])
+applianceRebootRequiered = Enum('applianceRebootRequiered', 'check with appliance if a reboot is required from changes',['applianceName'], states=['True', 'False'])
+applianceMemory = Gauge('applianceMemory', 'get appliance memory related information',['applianceName','metric'])
