@@ -1,6 +1,7 @@
 import os
 from .logger import log
 
+# Creates the debug folder to save information
 def createDebugFolder(debug:bool=False):
     if debug == True:
         log().info("starting program in debug mode")
@@ -23,7 +24,7 @@ def createDebugFolder(debug:bool=False):
     else:
         pass
 
-
+# Confirms the appliance returned a 200 and not an error
 def confirmReturn(func , dictionary:dict, debug:bool):
     if debug == True:
         try:
@@ -34,6 +35,7 @@ def confirmReturn(func , dictionary:dict, debug:bool):
     else:
         pass
 
+# Wrapper to except errors
 def errorHandler(func):
     def wrapper(*args):
         try:
@@ -42,3 +44,22 @@ def errorHandler(func):
             log().error({func : error})
         return {func : out}
     return wrapper
+
+
+# Returns the function that needs to be called for a given feature
+def checkCollector(feature,collectorMap):
+    for f,s in collectorMap.items():
+        for k in feature.keys():
+            if f == k:
+                return s
+
+           
+# Returns the NE_PK of the appliance base on the name
+def getApplianceID(name,applianceDict:dict):
+    try:
+        applianceID = applianceDict.get(name)
+    except Exception as error:
+        log().error(f"error getting the appliance ID for {name}")
+        log().error(error)
+    return applianceID
+
