@@ -17,7 +17,7 @@ class collectOrchestratorMetrics():
         self.interval = interval
         self.debug = debug
         self.Break = Break
-        self.orch = Orchestrator(url=self.url, verify_ssl=self.verify_ssl, api_key=self.key , log_console=self.debug)
+        self.orch = Orchestrator(url=self.url, verify_ssl=self.verify_ssl, api_key=self.key )
         self.hostname = self.orch.get_orchestrator_hostname()['gms_hostname']
         while True:
             # get a list of all the methods in this class
@@ -134,12 +134,128 @@ class collectOrchestratorMetrics():
 
         return orch_return
 
-    @errorHandler
-    def _test(self):
-        orch_return = self.orch.get_portal_services_status() 
-        return orch_return
 
 
 #--------------------------------------------------#
 # Metrics Collections for the Appliances
 #--------------------------------------------------#
+
+def applianceCollector(**kwargs):
+    if 'system' in kwargs['feature']:
+        try:
+            collectApplianceSystem(
+            url = kwargs['url'],
+            ne_pk = kwargs['ne_pk'],
+            applianceName = kwargs['applianceName'],
+            key = kwargs['key'],
+            verify_ssl = kwargs['verify_ssl'],
+            interval = kwargs['feature']['interval'],
+            debug = kwargs['debug'],
+            Break = kwargs['Break'],
+            )
+        except Exception as error:
+            log().error(f'failed to set argument {error}')
+
+
+
+
+def getAllAppliances(url,verify_ssl,api_key):
+    try:
+        #
+        log().info('getting appliances NE_PK')
+        sp_dict = {}
+        orch = Orchestrator(url=url, verify_ssl=verify_ssl, api_key=api_key)
+        orch_return = orch.get_appliances()
+        for device in orch_return:
+            sp_dict.update({device['hostName']: device['id']})
+    except Exception as error:
+        log().error(f'failed to get appliances NE_PK {error}')
+
+    return sp_dict
+
+
+
+class collectApplianceSystem():
+    def __init__(self,url,ne_pk,applianceName,key,verify_ssl,interval,debug, Break):
+        self.url = url
+        self.ne_pk = ne_pk
+        self.applianceName = applianceName
+        self.key = key
+        self.verify_ssl = verify_ssl
+        self.interval = interval
+        self.debug = debug
+        self.Break = Break
+        self.orch = Orchestrator(url=self.url, verify_ssl=self.verify_ssl, api_key=self.key )
+        while True:
+            # get a list of all the methods in this class
+            # loops over the list starting at index 1 to bypass __init__
+            # calls the method
+            methodList = inspect.getmembers(self, predicate=inspect.ismethod)
+            for m in range(1, len(methodList)):
+                i = methodList[m][1]()
+
+                logToFile().debug(message=dict({methodList[m][1].__name__ : i}), debug=self.debug) 
+                confirmReturn(func=methodList[m][1].__name__ ,dictionary=i, debug=self.debug) 
+
+            if self.Break == False:
+                wait(self.interval)
+            else:
+                break
+
+    @errorHandler
+    def _getApplianceAlarms(self):
+        path = '/alarm'
+        orch_return = self.orch.appliance_get_api(self.ne_pk, path) 
+        for key,value in orch_return['summary'].items():
+            applianceAlarm.labels(applianceName=self.applianceName,severity=key).set(value)
+        return orch_return
+
+    @errorHandler
+    def _getApplianceCPU(self):
+        path = '/cpustat'
+        orch_return = self.orch.appliance_get_api(self.ne_pk, path) 
+        latestTime = orch_return['latestTimestamp']
+        lastStats = orch_return['data'][-1]
+        cpuStats = lastStats[str(latestTime)]
+
+        for cpu in cpuStats:
+            cpu_name = cpu['cpu_number']
+            del cpu['cpu_number']
+            for k,v in cpu.items():
+                applianceCPU.labels(applianceName=self.applianceName,cpu_core=cpu_name,metric=k).set(v)
+
+        return orch_return
+
+    @errorHandler
+    def _getApplianceDiskUsage(self):
+        path = '/diskUsage'
+        orch_return = self.orch.appliance_get_api(self.ne_pk, path) 
+        for k,v in orch_return.items():
+            mount = k
+            del v['filesystem']
+            for a,b in v.items():
+                applianceDiskUsage.labels(applianceName=self.applianceName,mount=mount,metric=a).set(b)
+        return orch_return
+
+    @errorHandler
+    def _getApplianceRebootRequiered(self):
+        path = '/license/isRebootRequired'
+        orch_return = self.orch.appliance_get_api(self.ne_pk, path)
+        applianceRebootRequiered.labels(applianceName=self.applianceName).state(str(orch_return['isRebootRequired'])) #Setting Metric
+        return orch_return
+
+    @errorHandler
+    def _getApplianceMemory(self):
+        path = '/memory'
+        orch_return = self.orch.appliance_get_api(self.ne_pk, path)
+        for k,v in orch_return.items():
+            applianceMemory.labels(applianceName=self.applianceName,metric=k).set(v)
+        return orch_return
+
+class collectApplianceBGP():
+    def __init__(self):
+        pass
+
+class collectApplianceOSPF():
+    def __init__(self):
+        pass
