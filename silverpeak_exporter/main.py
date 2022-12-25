@@ -2,7 +2,8 @@ import threading
 from prometheus_client import start_http_server
 from .logger import log
 from .file import settings
-from .collectors import collectOrchestratorMetrics
+from .utls import checkCollector,getApplianceID
+from .collectors import collectOrchestratorMetrics,getAllAppliances,applianceCollector
 
 def main():
 # Loading user inputs via CLI
@@ -37,6 +38,27 @@ def main():
         x.start()        
     else:
         log().info(f'skipping orchestrator metric collection')    
+
+    appliances = getAllAppliances(silverpeakUrl,silverpeakSSL,silverpeakKey)
+
+    for key in fileConfig.metricsAppliance()['appliances'].keys():
+        applianceName = key
+        applianceID = getApplianceID(name=applianceName,applianceDict=appliances)
+        log().info(f'starting appliance metric collection on {key,applianceID}')
+
+        for feature in fileConfig.metricsAppliance()['appliances'][key]:
+            z = threading.Thread(target=applianceCollector, kwargs={
+                'feature' : feature,
+                'url' : silverpeakUrl,
+                'ne_pk' : applianceID,
+                'applianceName' : applianceName,
+                'key' : silverpeakKey,
+                'verify_ssl' : silverpeakSSL,
+                'debug' : debug,
+                'Break' : Break,
+            })
+            z.start()   
+
 
 
 if __name__ == '__main__':
