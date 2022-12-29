@@ -1,7 +1,10 @@
 #Importing prometheus library
 from prometheus_client import Info,Gauge,Enum
 
+#---------#---------#---------#---------#---------#
 # Orchestrator Metrics
+#---------#---------#---------#---------#---------#
+
 uptime = Info('uptime', 'silverpeak orchestrator uptime',['orchName'])
 release = Info('release', 'silverpeak orchestrator release version',['orchName'])
 platform = Info('platform', 'silverpeak orchestrator platform',['orchName'])
@@ -27,3 +30,13 @@ totalAppDefinition = Gauge('totalAppDefinition', 'count for application definiti
 totalOrchSaasApps = Gauge('totalOrchSaasApps', 'count of internet services defined on Orchestrator',['orchName'])
 orchPortalStatus = Enum('orchPortalStatus', 'current connectivity status between Orchestrator and Cloud Portal',['orchName'], states=['unable to connect', 'connected', 'connecting'])
 cloudPortalServices = Gauge('cloudPortalServices', 'silverpeak cloud portal service and status',['orchName','portalService','status'])
+
+#---------#---------#---------#---------#---------#
+# Appliance Metrics
+#---------#---------#---------#---------#---------#
+
+applianceAlarm = Gauge('applianceAlarm', 'summary of active alarms for given appliance',['applianceName','severity'])
+applianceCPU = Gauge('applianceCPU', 'cpu utilization in porcentage for each appliance core',['applianceName','cpu_core','metric'])
+applianceDiskUsage = Gauge('applianceDiskUsage', 'appliance disk utilization for each mount point',['applianceName','mount','metric'])
+applianceRebootRequiered = Enum('applianceRebootRequiered', 'check with appliance if a reboot is required from changes',['applianceName'], states=['True', 'False'])
+applianceMemory = Gauge('applianceMemory', 'get appliance memory related information',['applianceName','metric'])

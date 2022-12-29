@@ -18,17 +18,25 @@
 | licenseNumTier50M  | Gauge  | number of 50M licenses  | 
 | licenseNumTier100M  | Gauge  | number of 100M licenses   | 
 | licenseNumTier200M  | Gauge  | number of 200M licenses | 
-|licenseNumTier500M| Gauge  | number of 500M licenses  | 
-|licenseNumTier1G| Gauge  | number of 1G licenses  | 
-|licenseNumTier2G| Gauge  | number of 2G licenses  | 
-|licenseNumTierUM| Gauge  | number of Unlimited licenses  | 
-|totalOverlays| Gauge  | number of overlays configured  | 
-|totalRegions| Gauge  | number of regions configured  | 
-|totalSaasApps| Gauge  | list of unique SaaS applications in the internet services database  | 
-|totalAppDefinition| Gauge  | count for application definition data for Address Map from Cloud Portal  | 
-|totalOrchSaasApps| Gauge  | count of internet services defined on Orchestrator  | 
-|orchPortalStatus| Enum   | current connectivity status between Orchestrator and Cloud Portal  | 
-|cloudPortalServices| Gauge  | silverpeak cloud portal service and status  | 
+| licenseNumTier500M| Gauge  | number of 500M licenses  | 
+| licenseNumTier1G| Gauge  | number of 1G licenses  | 
+| licenseNumTier2G| Gauge  | number of 2G licenses  | 
+| licenseNumTierUM| Gauge  | number of Unlimited licenses  | 
+| totalOverlays| Gauge  | number of overlays configured  | 
+| totalRegions| Gauge  | number of regions configured  | 
+| totalSaasApps| Gauge  | list of unique SaaS applications in the internet services database  | 
+| totalAppDefinition| Gauge  | count for application definition data for Address Map from Cloud Portal  | 
+| totalOrchSaasApps| Gauge  | count of internet services defined on Orchestrator  | 
+| orchPortalStatus| Enum   | current connectivity status between Orchestrator and Cloud Portal  | 
+| cloudPortalServices| Gauge  | silverpeak cloud portal service and status  | 
 
 
 ## Appliances 
+
+| Name  | Type  | Description  |
+| ------------ | ------------ | ------------ |
+| applianceAlarm  | Gauge  | summary of active alarms for given appliance  |
+| applianceCPU  | Gauge  | cpu utilization in porcentage for each appliance core  | 
+| applianceDiskUsage  | Gauge  | appliance disk utilization for each mount point  | 
+| applianceRebootRequiered  | Enum  | check with appliance if a reboot is required from changes  | 
+| applianceMemory  | Gauge  | get appliance memory related information  | 

@@ -4,12 +4,16 @@ from .logger import log,logToFile
 from .args import parser
 from .utls import createDebugFolder
 
-def readConfig(filePath):
+def readConfig(filePath,debug):
     with open(filePath, "r") as stream:
         try:
             ymlVars = yaml.safe_load(stream)
         except yaml.YAMLError as exc:
             log().error(exc)
+    if debug:
+        logToFile().debug(message=ymlVars,debug=debug)
+        log().debug(ymlVars)
+
     return ymlVars
 
 
@@ -22,9 +26,9 @@ class settings():
                 out = False
         except KeyError as error:
             out = False
-# Only turn this on when you want to debug on the container
-#        log().debug({"environment": key, "value" : out})
-        logToFile().debug(message={"environment": key, "value" : out},debug=debug)
+        if debug:
+            log().debug({"environment": key, "value" : out})
+            logToFile().debug(message={"environment": key, "value" : out},debug=debug)
         return out
 
     def __init__(self):
@@ -38,7 +42,7 @@ class settings():
         else:
             filepath = checkENV
         
-        jsonConfigs = readConfig(filepath)
+        jsonConfigs = readConfig(filepath, self.userInput.debug)
         self.config = jsonConfigs
 
 
@@ -140,5 +144,15 @@ class settings():
         except Exception as error:
          #   log().error(error)
             out.update({"interval" : 60})
+
+        return out
+
+    def metricsAppliance(self):
+        out = {}
+        try:
+            out.update({"appliances" : self.config['appliances']})
+        except Exception as error:
+         #   log().error(error)
+            out.update({"appliances" : False})
 
         return out
