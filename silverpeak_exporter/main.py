@@ -38,7 +38,7 @@ def main():
             silverpeakSSL,
             metricsOrchestratorInterval,
             debug,
-            lambda : Break,
+            Break,
         ))
         x.start()   
         s(2)     
@@ -63,32 +63,13 @@ def main():
                     'key' : silverpeakKey,
                     'verify_ssl' : silverpeakSSL,
                     'debug' : debug,
-                    'Break' : lambda : Break,
+                    'Break' : Break,
                 })
                 z.start()
             s(2)
     else:
         log().info(f'skipping appliance metric collection')    
 
-    infinite = True
-    while infinite:
-        active_thread = threading.active_count()
-        if debug:
-            log().debug(f'number of active threads: {active_thread}')
-            log().debug(f'number of expected threads: {threadCount}')
-        if threadCount != active_thread:
-            log().error('total_threads are not equal to the amount of targets')
-            Break = True
-            x.join()
-            z.join()
-            log().error('shutting down')
-            end(1)
-        if Break:
-            infinite = False
-        if debug:
-            s(5)
-        else:
-            s(60)
 
 if __name__ == '__main__':
     main()
