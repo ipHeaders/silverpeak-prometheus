@@ -4,6 +4,15 @@ import os
 
 
 class log():
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    CHANGE = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
     # create logger
     logger = logging.getLogger('silverpeak-prometheus')
     logger.setLevel(logging.DEBUG)
@@ -24,11 +33,11 @@ class log():
     def __init__(self):
         pass
     def debug(self,message):
-        self.logger.debug(message)
+        self.logger.debug(self.OKBLUE + message + self.ENDC)
     def info(self,message):
-        self.logger.info(message)
+        self.logger.debug(self.OKGREEN + message + self.ENDC)
     def error(self,message):
-        self.logger.error(message)
+        self.logger.debug(self.FAIL + message + self.ENDC)
 
 
 class logToFile():

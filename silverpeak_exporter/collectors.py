@@ -276,7 +276,7 @@ class collectApplianceSystem():
 
     @errorHandler
     def _getApplianceMemory(self):
-        path = '/memor'
+        path = '/memory'
         orch_return = self.orch.appliance_get_api(self.ne_pk, path)
         for k,v in orch_return.items():
             applianceMemory.labels(applianceName=self.applianceName,metric=k).set(v)
