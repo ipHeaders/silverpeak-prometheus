@@ -2,9 +2,8 @@ import threading
 from prometheus_client import start_http_server
 from .logger import log
 from .file import settings
-from .utls import checkCollector,getApplianceID
+from .utls import getApplianceID
 from .collectors import collectOrchestratorMetrics,getAllAppliances,applianceCollector
-from sys import exit as end
 from time import sleep as s
 
 
