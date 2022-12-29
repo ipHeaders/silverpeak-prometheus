@@ -41,7 +41,7 @@ pipeline {
             sh 'git clone https://$githubToken:x-oauth-basic@$artifactsRepo'
             sh 'poetry install'
             sh ('poetry run spexporter -f $WORKSPACE/artifacts/$projectName/test_vars.yml -k $silverpeakToken -o $silverpeakOrch -d -b')
-            sh 'python3 $WORKSPACE/test/result.py'
+            sh 'poetry run $WORKSPACE/test/result.py'
         }
      }
        stage('testing:py310') {
@@ -56,7 +56,7 @@ pipeline {
             sh 'git clone https://$githubToken:x-oauth-basic@$artifactsRepo'
             sh 'poetry install'
             sh ('poetry run spexporter -f $WORKSPACE/artifacts/$projectName/test_vars.yml -k $silverpeakToken -o $silverpeakOrch -d -b')
-            sh 'python3 $WORKSPACE/test/result.py'
+            sh 'poetry run $WORKSPACE/test/result.py'
         }
      }
        stage('testing:py311') {
@@ -71,7 +71,7 @@ pipeline {
             sh 'git clone https://$githubToken:x-oauth-basic@$artifactsRepo'
             sh 'poetry install'
             sh ('poetry run spexporter -f $WORKSPACE/artifacts/$projectName/test_vars.yml -k $silverpeakToken -o $silverpeakOrch -d -b')
-            sh 'python3 $WORKSPACE/test/result.py'
+            sh 'poetry run $WORKSPACE/test/result.py'
         }
      }
        stage('Poetry Build') {
