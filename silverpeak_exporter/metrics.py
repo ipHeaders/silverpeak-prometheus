@@ -2,6 +2,11 @@
 from prometheus_client import Info,Gauge,Enum
 
 #---------#---------#---------#---------#---------#
+# Application Metrics
+#---------#---------#---------#---------#---------#
+activeThreads = Gauge('activeThreads', 'number of total python threads')
+
+#---------#---------#---------#---------#---------#
 # Orchestrator Metrics
 #---------#---------#---------#---------#---------#
 
