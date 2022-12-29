@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "silverpeak_exporter"
-version = "0.1.1"
+version = "0.1.2"
 description = "Prometheus exporter for Silverpeak SD-WAN Appliances."
 authors = ["IP Headers <ipHeaders@users.noreply.github.com>"]
 license = "MIT"
