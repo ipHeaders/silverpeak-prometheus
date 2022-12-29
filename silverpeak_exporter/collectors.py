@@ -1,10 +1,42 @@
 import inspect
 from pyedgeconnect import Orchestrator
-from prometheus_client import Info,Gauge
 from time import sleep as wait
 from .logger import log,logToFile
 from .utls import confirmReturn,errorHandler
 from .metrics import *
+import threading
+
+#--------------------------------------------------#
+# Application Metrics Collections
+#--------------------------------------------------#
+
+class collectApplicationMetrics():
+    def __init__(self,debug, Break):
+        self.debug = debug
+        self.Break = Break
+        while True:
+            # get a list of all the methods in this class
+            # loops over the list starting at index 1 to bypass __init__
+            # calls the method
+            methodList = inspect.getmembers(self, predicate=inspect.ismethod)
+            for m in range(1, len(methodList)):
+                i = methodList[m][1]()
+
+                logToFile().debug(message=dict({methodList[m][1].__name__ : i}), debug=self.debug) 
+                confirmReturn(func=methodList[m][1].__name__ ,dictionary=i, debug=self.debug) 
+            if self.Break == False:
+                wait(60)
+            else:
+                break
+
+
+    @errorHandler
+    def _getactiveThreads(self):
+        activeThread = threading.active_count()
+        sysOut = {"activeThreads" : activeThread}
+        activeThreads.set(activeThread)
+        return sysOut
+       
 
 #--------------------------------------------------#
 # Metrics Collections for the Orchestrator
