@@ -16,10 +16,11 @@ class collectOrchestratorMetrics():
         self.verify_ssl = verify_ssl
         self.interval = interval
         self.debug = debug
-        self.Break = Break
+        self.Break = Break()
         self.orch = Orchestrator(url=self.url, verify_ssl=self.verify_ssl, api_key=self.key )
         self.hostname = self.orch.get_orchestrator_hostname()['gms_hostname']
         while True:
+            self.Break = Break()
             # get a list of all the methods in this class
             # loops over the list starting at index 1 to bypass __init__
             # calls the method
@@ -29,7 +30,6 @@ class collectOrchestratorMetrics():
 
                 logToFile().debug(message=dict({methodList[m][1].__name__ : i}), debug=self.debug) 
                 confirmReturn(func=methodList[m][1].__name__ ,dictionary=i, debug=self.debug) 
-
             if self.Break == False:
                 wait(self.interval)
             else:
@@ -184,9 +184,10 @@ class collectApplianceSystem():
         self.verify_ssl = verify_ssl
         self.interval = interval
         self.debug = debug
-        self.Break = Break
+        self.Break = Break()
         self.orch = Orchestrator(url=self.url, verify_ssl=self.verify_ssl, api_key=self.key )
         while True:
+            self.Break = Break()
             # get a list of all the methods in this class
             # loops over the list starting at index 1 to bypass __init__
             # calls the method
@@ -196,7 +197,6 @@ class collectApplianceSystem():
 
                 logToFile().debug(message=dict({methodList[m][1].__name__ : i}), debug=self.debug) 
                 confirmReturn(func=methodList[m][1].__name__ ,dictionary=i, debug=self.debug) 
-
             if self.Break == False:
                 wait(self.interval)
             else:

@@ -24,8 +24,8 @@ def main():
 # Start up the server to expose the metrics.
     start_http_server(prometheusPort)
     log().info(f'starting prometheus exporter on {prometheusPort}')
-    stop_threads = False
     threadCount = 2
+    
 
 # Triggering the thread that will collect orchestrator metrics
     if fileConfig.metricsOrchestrator()['collect']:
@@ -40,7 +40,8 @@ def main():
             debug,
             lambda : Break,
         ))
-        x.start()        
+        x.start()   
+        s(2)     
     else:
         log().info(f'skipping orchestrator metric collection')    
 
@@ -65,24 +66,29 @@ def main():
                     'Break' : lambda : Break,
                 })
                 z.start()
+            s(2)
     else:
         log().info(f'skipping appliance metric collection')    
 
     infinite = True
     while infinite:
         active_thread = threading.active_count()
-        log().info(f'number of active threads: {active_thread}')
-        log().info(f'number of expected threads: {threadCount}')
+        if debug:
+            log().debug(f'number of active threads: {active_thread}')
+            log().debug(f'number of expected threads: {threadCount}')
         if threadCount != active_thread:
             log().error('total_threads are not equal to the amount of targets')
             Break = True
-#            x.join()
-#            z.join()
+            x.join()
+            z.join()
             log().error('shutting down')
             end(1)
         if Break:
             infinite = False
-        s(60)
+        if debug:
+            s(5)
+        else:
+            s(60)
 
 if __name__ == '__main__':
     main()
