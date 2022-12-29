@@ -153,6 +153,6 @@ class settings():
             out.update({"appliances" : self.config['appliances']})
         except Exception as error:
          #   log().error(error)
-            out.update({"appliances" : []})
+            out.update({"appliances" : False})
 
         return out

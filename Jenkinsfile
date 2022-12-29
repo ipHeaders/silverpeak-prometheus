@@ -7,8 +7,10 @@ def pythonList = [
 pipeline {
   environment {
     projectName = "silverpeak-prometheus"
+    githubToken = credentials('githubToken')
     silverpeakOrch = credentials('silverpeak-orch')
     silverpeakToken = credentials('silverpeak-token')
+    artifactsRepo = "github.com/ipHeaders/artifacts.git"
   }
     agent any
     options {
@@ -36,8 +38,9 @@ pipeline {
          steps{
             sh 'python3 --version'
             sh 'poetry --version'
+            sh 'git clone https://$githubToken:x-oauth-basic@$artifactsRepo'
             sh 'poetry install'
-            sh ('poetry run spexporter -f $WORKSPACE/test/test_vars.yml -k $silverpeakToken -o $silverpeakOrch -d -b')
+            sh ('poetry run spexporter -f $WORKSPACE/artifacts/$projectName/test_vars.yml -k $silverpeakToken -o $silverpeakOrch -d -b')
         }
      }
        stage('testing:py310') {
@@ -49,8 +52,9 @@ pipeline {
          steps{
             sh 'python3 --version'
             sh 'poetry --version'
+            sh 'git clone https://$githubToken:x-oauth-basic@$artifactsRepo'
             sh 'poetry install'
-            sh ('poetry run spexporter -f $WORKSPACE/test/test_vars.yml -k $silverpeakToken -o $silverpeakOrch -d -b')
+            sh ('poetry run spexporter -f $WORKSPACE/artifacts/$projectName/test_vars.yml -k $silverpeakToken -o $silverpeakOrch -d -b')
         }
      }
        stage('testing:py311') {
@@ -62,8 +66,9 @@ pipeline {
          steps{
             sh 'python3 --version'
             sh 'poetry --version'
+            sh 'git clone https://$githubToken:x-oauth-basic@$artifactsRepo'
             sh 'poetry install'
-            sh ('poetry run spexporter -f $WORKSPACE/test/test_vars.yml -k $silverpeakToken -o $silverpeakOrch -d -b')
+            sh ('poetry run spexporter -f $WORKSPACE/artifacts/$projectName/test_vars.yml -k $silverpeakToken -o $silverpeakOrch -d -b')
         }
      }
        stage('Poetry Build') {
