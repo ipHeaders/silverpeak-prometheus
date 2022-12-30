@@ -4,9 +4,9 @@
 
 | Name  | Type  | Description  |
 | ------------ | ------------ | ------------ |
-| uptime  | Label  | silverpeak orchestrator uptime  |
-| release  | Label  | silverpeak orchestrator release version  | 
-| platform  | Label  | silverpeak orchestrator platform  | 
+| uptime_info  | Label  | silverpeak orchestrator uptime  |
+| release_info  | Label  | silverpeak orchestrator release version  | 
+| platform_info  | Label  | silverpeak orchestrator platform  | 
 | numActiveUsers  | Gauge  | number of active users logged in  | 
 | activeAlarms  | Gauge  | summary of active alarms for Orchestrator and all appliances  | 
 | totalAppliances  | Gauge  | number of total appliances in your orchestrator  | 
