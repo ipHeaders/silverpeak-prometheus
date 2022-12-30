@@ -7,7 +7,7 @@
 [![Downloads](https://static.pepy.tech/personalized-badge/silverpeak-exporter?period=total&units=none&left_color=grey&right_color=orange&left_text=PyPI%20Downloads)](https://pepy.tech/project/silverpeak-exporter)
 
 # silverpeak-prometheus-exporter
-Silverpeak/Aruba SD-WAN Prometheus Exporter, this tool is to query the Silverpeal/Aruba SD-WAN orchestrator export the metrics to a prometheus database.
+Silverpeak/Aruba SD-WAN Prometheus Exporter, this tool is to query the Silverpeak/Aruba SD-WAN orchestrator export the metrics to a prometheus database.
 
 ## Requierements
 
