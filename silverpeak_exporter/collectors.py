@@ -282,6 +282,41 @@ class collectApplianceSystem():
             applianceMemory.labels(applianceName=self.applianceName,metric=k).set(v)
         return orch_return
 
+    @errorHandler
+    def _getApplianceSystemInfo(self):
+        path = '/systemInfo'
+        orch_return = self.orch.appliance_get_api(self.ne_pk, path)
+        try:
+            applianceHostname.labels(applianceName=self.applianceName).info({'hostName' : orch_return['hostName']}) #Setting Metric
+        except:
+            applianceHostname.labels(applianceName=self.applianceName).info({'hostName' : 'null'}) #Setting Metric
+        try:
+            applianceModel.labels(applianceName=self.applianceName).info({'modelShort' : orch_return['modelShort']}) #Setting Metric
+        except:
+            applianceModel.labels(applianceName=self.applianceName).info({'modelShort' : 'null'}) #Setting Metric
+        try:
+            appliancePlatform.labels(applianceName=self.applianceName).info({'platform' : orch_return['platform']}) #Setting Metric
+        except:
+            appliancePlatform.labels(applianceName=self.applianceName).info({'platform' : 'null'}) #Setting Metric
+        try:
+            applianceUptime.labels(applianceName=self.applianceName).set(orch_return['uptime']) #Setting Metric
+        except:
+            applianceUptime.labels(applianceName=self.applianceName).set(0) #Setting Metric
+        try:
+            applianceUptimeString.labels(applianceName=self.applianceName).info({'uptimeString' : orch_return['uptimeString']}) #Setting Metric
+        except:
+            applianceUptimeString.labels(applianceName=self.applianceName).info({'uptimeString' : 'null'}) #Setting Metric
+        try:
+            applianceRelease.labels(applianceName=self.applianceName).info({'release' : orch_return['release']}) #Setting Metric
+        except:
+            applianceRelease.labels(applianceName=self.applianceName).info({'release' : 'null'}) #Setting Metric
+        try:
+            applianceDeploymentMode.labels(applianceName=self.applianceName).info({'deploymentMode' : orch_return['deploymentMode']}) #Setting Metric
+        except:
+            applianceDeploymentMode.labels(applianceName=self.applianceName).info({'deploymentMode' : 'null'}) #Setting Metric
+            
+        return orch_return
+
 class collectApplianceBGP():
     def __init__(self):
         pass
