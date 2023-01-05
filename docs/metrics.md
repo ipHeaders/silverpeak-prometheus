@@ -35,6 +35,13 @@
 
 | Name  | Type  | Description  |
 | ------------ | ------------ | ------------ |
+| applianceHostname_info  | Label  | name of the silverpeak edge connect  |
+| applianceModel_info  | Label  | mode of the silverpeak appliance  |
+| appliancePlatform_info  | Label  | platform of the silverpeak appliance  |
+| applianceUptime  | Gauge  | uptime in milliseconds for the silverpeak appliance  |
+| applianceUptimeString_info  | Label  | uptime in string format for the silverpeak appliance  |
+| applianceRelease_info  | Label  | appliance release version  |
+| applianceDeploymentMode_info  | Label  | the deployment mode of the appliance  |
 | applianceAlarm  | Gauge  | summary of active alarms for given appliance  |
 | applianceCPU  | Gauge  | cpu utilization in porcentage for each appliance core  | 
 | applianceDiskUsage  | Gauge  | appliance disk utilization for each mount point  | 
