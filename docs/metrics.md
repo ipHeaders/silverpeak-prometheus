@@ -29,6 +29,7 @@
 | totalOrchSaasApps| Gauge  | count of internet services defined on Orchestrator  | 
 | orchPortalStatus| Enum   | current connectivity status between Orchestrator and Cloud Portal  | 
 | cloudPortalServices| Gauge  | silverpeak cloud portal service and status  | 
+| totalTunnelCount| Gauge  | get total tunnel count across all appliances  | 
 
 
 ## Appliances 

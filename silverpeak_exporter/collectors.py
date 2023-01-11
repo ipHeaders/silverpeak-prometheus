@@ -165,7 +165,11 @@ class collectOrchestratorMetrics():
 
         return orch_return
 
-
+    @errorHandler
+    def _getTotalTunnelCount(self):
+        orch_return = self.orch.get_total_tunnel_count()
+        totalTunnelCount.labels(orchName=self.hostname).set(orch_return['totalTunnelCount'])
+        return orch_return
 
 #--------------------------------------------------#
 # Metrics Collections for the Appliances

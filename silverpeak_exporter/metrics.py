@@ -35,6 +35,7 @@ totalAppDefinition = Gauge('totalAppDefinition', 'count for application definiti
 totalOrchSaasApps = Gauge('totalOrchSaasApps', 'count of internet services defined on Orchestrator',['orchName'])
 orchPortalStatus = Enum('orchPortalStatus', 'current connectivity status between Orchestrator and Cloud Portal',['orchName'], states=['unable to connect', 'connected', 'connecting'])
 cloudPortalServices = Gauge('cloudPortalServices', 'silverpeak cloud portal service and status',['orchName','portalService','status'])
+totalTunnelCount = Gauge('totalTunnelCount', 'get total tunnel count across all appliances',['orchName'])
 
 #---------#---------#---------#---------#---------#
 # Appliance Metrics
