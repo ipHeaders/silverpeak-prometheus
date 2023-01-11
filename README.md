@@ -22,6 +22,7 @@ Silverpeak/Aruba SD-WAN Prometheus Exporter, this tool is to query the Silverpea
 ## References
 - Avaiable Exposed Metrics [Metrics](https://github.com/ipHeaders/silverpeak-prometheus/tree/main/docs/metrics.md)
 - DockerHub Project [Docker](https://hub.docker.com/repository/registry-1.docker.io/ipheaders/silverpeak-prometheus/general)
+- Grafana Dashboard [Grafana](https://grafana.com/grafana/dashboards/17745-silverpeak-exporter/)
 
 ## Grafana Example
 ### Orchestrator
