@@ -39,7 +39,13 @@ cloudPortalServices = Gauge('cloudPortalServices', 'silverpeak cloud portal serv
 #---------#---------#---------#---------#---------#
 # Appliance Metrics
 #---------#---------#---------#---------#---------#
-
+applianceHostname = Info('applianceHostname', 'name of the silverpeak edge connect',['applianceName'])
+applianceModel = Info('applianceModel', 'mode of the silverpeak appliance',['applianceName'])
+appliancePlatform = Info('appliancePlatform', 'platform of the silverpeak appliance',['applianceName'])
+applianceUptime = Gauge('applianceUptime', 'uptime in milliseconds for the silverpeak appliance',['applianceName'])
+applianceUptimeString = Info('applianceUptimeString', 'uptime in string format for the silverpeak appliance',['applianceName'])
+applianceRelease = Info('applianceRelease', 'appliance release version',['applianceName'])
+applianceDeploymentMode = Info('applianceDeploymentMode', 'the deployment mode of the appliance',['applianceName'])
 applianceAlarm = Gauge('applianceAlarm', 'summary of active alarms for given appliance',['applianceName','severity'])
 applianceCPU = Gauge('applianceCPU', 'cpu utilization in porcentage for each appliance core',['applianceName','cpu_core','metric'])
 applianceDiskUsage = Gauge('applianceDiskUsage', 'appliance disk utilization for each mount point',['applianceName','mount','metric'])
