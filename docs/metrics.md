@@ -29,9 +29,10 @@
 | totalOrchSaasApps| Gauge  | count of internet services defined on Orchestrator  | 
 | orchPortalStatus| Enum   | current connectivity status between Orchestrator and Cloud Portal  | 
 | cloudPortalServices| Gauge  | silverpeak cloud portal service and status  | 
+| totalTunnelCount| Gauge  | get total tunnel count across all appliances  | 
 
 
-## Appliances 
+## Appliances System
 
 | Name  | Type  | Description  |
 | ------------ | ------------ | ------------ |
@@ -47,3 +48,22 @@
 | applianceDiskUsage  | Gauge  | appliance disk utilization for each mount point  | 
 | applianceRebootRequiered  | Enum  | check with appliance if a reboot is required from changes  | 
 | applianceMemory  | Gauge  | get appliance memory related information  | 
+
+
+## Appliances BGP
+
+| Name  | Type  | Description  |
+| ------------ | ------------ | ------------ |
+| bgpNumVrfs  | Gauge  | total number of vrf using bgp  | 
+| bgpProcessState_info  | Label  | state of the bgp process  |
+| bgpRejectMismatches  | Gauge  | bgp neighbors rejected by a mismatch  | 
+| bgpNumPeers  | Gauge  | total number of bgp peers  | 
+| bgpSubsInstalled  | Gauge  | total numbers of subnets installed in the bgp process  | 
+| bgpOspfRoutes  | Gauge  | total number of routes originated by OSPF  | 
+| bgpIBGPRoutes  | Gauge  | total number of routes originated by iBGP  | 
+| bgpEBGPRoutes  | Gauge  | total number of routes originated by eBGP  | 
+| bgpNeighborState  | Gauge  | state of bgp neighbor  | 
+| bgpNeighborStateStr_info  | Label  | state of bgp neighbor in string  |
+| bgpNeighborUptime  | Gauge  | uptime of the bgp neighbor  | 
+| bgpNeighborReceivedPrefix  | Gauge  | total number of prefixes received from the neighbor  | 
+| bgpNeighborSentPrefix  | Gauge  | total number of prefixes advertised to the neighbor  | 

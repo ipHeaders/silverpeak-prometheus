@@ -60,7 +60,6 @@ def main():
         for key in fileConfig.metricsAppliance()['appliances'].keys():
             applianceName = key
             applianceID = getApplianceID(name=applianceName,applianceDict=appliances)
-            log().info(f'starting appliance metric collection on {key,applianceID}')
     
             for feature in fileConfig.metricsAppliance()['appliances'][key]:
                 z = threading.Thread(target=applianceCollector, kwargs={
