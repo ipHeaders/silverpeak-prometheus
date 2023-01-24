@@ -2,15 +2,15 @@ import threading
 from prometheus_client import start_http_server
 from .logger import log
 from .file import settings
-from .utls import getApplianceID,getAppVersion
+from .utls import getApplianceID
 from .collectors import collectOrchestratorMetrics,getAllAppliances,applianceCollector,collectApplicationMetrics
 from time import sleep as s
 
 
 def main():
 # Loads the application version and logs it
-    appVersion = getAppVersion()
-    log().info(f'starting application on version exporter {appVersion}')
+#    appVersion = getAppVersion()
+#    log().info(f'starting application on version exporter {appVersion}')
 # Loading user inputs via CLI
     fileConfig = settings()
 # Setting common used varaibles
