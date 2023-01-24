@@ -43,25 +43,29 @@ def confirmReturn(func , dictionary:dict, debug:bool):
     else:
         pass
 
-def writeResult(func, result):
-    pathDir = os.path.dirname(os.path.realpath(__file__))
-    debugFolder = os.path.join(pathDir, "debug")
-    resultFile = os.path.join(debugFolder,'result.yml')
+def writeResult(func, result, debug):
+    if debug:
+        pathDir = os.path.dirname(os.path.realpath(__file__))
+        debugFolder = os.path.join(pathDir, "debug")
+        resultFile = os.path.join(debugFolder,'result.yml')
+    
+        with open(resultFile, "a") as ymlFile:
+            data = { func : result}
+            yaml.dump(data, ymlFile)
 
-    with open(resultFile, "a") as ymlFile:
-        data = { func.__name__ : result}
-        yaml.dump(data, ymlFile)
 
 # Wrapper to except errors
 def errorHandler(func):
     def wrapper(*args):
         try:
             out = func(*args)
-            writeResult(func, True)
+            result = True
         except Exception as error:
             log().error({func : error})
-            writeResult(func, False)
-        return {func : out}
+            out = error
+            result = False
+        return {func.__name__ : out,
+                'result' : result}
     return wrapper
 
 
