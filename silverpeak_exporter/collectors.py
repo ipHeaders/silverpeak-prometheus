@@ -2,7 +2,7 @@ import inspect
 from pyedgeconnect import Orchestrator
 from time import sleep as wait
 from .logger import log,logToFile
-from .utls import confirmReturn,errorHandler
+from .utls import confirmReturn,errorHandler,writeResult
 from .metrics import *
 import threading
 
@@ -24,6 +24,7 @@ class collectApplicationMetrics():
 
                 logToFile().debug(message=dict({methodList[m][1].__name__ : i}), debug=self.debug) 
                 confirmReturn(func=methodList[m][1].__name__ ,dictionary=i, debug=self.debug) 
+                writeResult(func=list(i.keys())[0], result=i['result'], debug=self.debug)
             if self.Break == False:
                 wait(60)
             else:
@@ -61,6 +62,7 @@ class collectOrchestratorMetrics():
 
                 logToFile().debug(message=dict({methodList[m][1].__name__ : i}), debug=self.debug) 
                 confirmReturn(func=methodList[m][1].__name__ ,dictionary=i, debug=self.debug) 
+                writeResult(func=list(i.keys())[0], result=i['result'], debug=self.debug)
             if self.Break == False:
                 wait(self.interval)
             else:
@@ -250,9 +252,9 @@ class collectApplianceSystem():
             methodList = inspect.getmembers(self, predicate=inspect.ismethod)
             for m in range(1, len(methodList)):
                 i = methodList[m][1]()
-
                 logToFile().debug(message=dict({methodList[m][1].__name__ : i}), debug=self.debug) 
-                confirmReturn(func=methodList[m][1].__name__ ,dictionary=i, debug=self.debug) 
+                confirmReturn(func=methodList[m][1].__name__ ,dictionary=i, debug=self.debug)
+                writeResult(func=list(i.keys())[0], result=i['result'], debug=self.debug)
             if self.Break == False:
                 wait(self.interval)
             else:
@@ -364,6 +366,7 @@ class collectApplianceBGP():
 
                 logToFile().debug(message=dict({methodList[m][1].__name__ : i}), debug=self.debug) 
                 confirmReturn(func=methodList[m][1].__name__ ,dictionary=i, debug=self.debug) 
+                writeResult(func=list(i.keys())[0], result=i['result'], debug=self.debug)
             if self.Break == False:
                 wait(self.interval)
             else:
