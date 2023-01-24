@@ -84,9 +84,9 @@ def getApplianceID(name,applianceDict:dict):
 
 
 # Reads the toml file to find out application version
-def getAppVersion():
-    pathDir = os.path.dirname(os.path.realpath("pyproject.toml"))
-    tomlFile = os.path.join(pathDir,'pyproject.toml')
-    with open(tomlFile, "rb") as f:
-        data = tomli.load(f)
-        return data['tool']['poetry']['version']
+#def getAppVersion():
+#    pathDir = os.path.dirname(os.path.realpath("pyproject.toml"))
+#    tomlFile = os.path.join(pathDir,'pyproject.toml')
+#    with open(tomlFile, "rb") as f:
+#        data = tomli.load(f)
+#        return data['tool']['poetry']['version']
