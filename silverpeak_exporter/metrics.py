@@ -67,5 +67,5 @@ bgpEBGPRoutes = Gauge('bgpEBGPRoutes', 'total number of routes originated by eBG
 bgpNeighborState = Gauge('bgpNeighborState', 'state of bgp neighbor',['applianceName','peer_ip'])
 bgpNeighborStateStr = Info('bgpNeighborStateStr', 'state of bgp neighbor in string',['applianceName','peer_ip','asn'])
 bgpNeighborUptime = Gauge('bgpNeighborUptime', 'uptime of the bgp neighbor',['applianceName','peer_ip'])
-bgpNeighborSentPrefix = Gauge('bgpNeighborSentPrefix', 'total number of prefixes advertised to the neighbor',['applianceName','peer_ip'])
 bgpNeighborReceivedPrefix = Gauge('bgpNeighborReceivedPrefix', 'total number of prefixes received from the neighbor',['applianceName','peer_ip'])
+bgpNeighborSentPrefix = Gauge('bgpNeighborSentPrefix', 'total number of prefixes advertised to the neighbor',['applianceName','peer_ip'])
