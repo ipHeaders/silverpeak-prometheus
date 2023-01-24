@@ -176,12 +176,17 @@ class collectOrchestratorMetrics():
 #--------------------------------------------------#
 
 def applianceCollector(**kwargs):
+    applianceName = kwargs['applianceName']
+    ne_pk = kwargs['ne_pk']
+
     if 'system' in kwargs['feature']:
         try:
+            log().info(f'starting system metric collection on {applianceName,ne_pk}')
+
             collectApplianceSystem(
             url = kwargs['url'],
-            ne_pk = kwargs['ne_pk'],
-            applianceName = kwargs['applianceName'],
+            ne_pk = ne_pk,
+            applianceName = applianceName,
             key = kwargs['key'],
             verify_ssl = kwargs['verify_ssl'],
             interval = kwargs['feature']['interval'],
@@ -191,6 +196,22 @@ def applianceCollector(**kwargs):
         except Exception as error:
             log().error(f'failed to set argument {error}')
 
+    if 'bgp' in kwargs['feature']:
+        try:
+            log().info(f'starting bgp metric collection on {applianceName,ne_pk}')
+
+            collectApplianceBGP(
+            url = kwargs['url'],
+            ne_pk = ne_pk,
+            applianceName = applianceName,
+            key = kwargs['key'],
+            verify_ssl = kwargs['verify_ssl'],
+            interval = kwargs['feature']['interval'],
+            debug = kwargs['debug'],
+            Break = kwargs['Break'],
+            )
+        except Exception as error:
+            log().error(f'failed to set argument {error}')
 
 
 
@@ -322,9 +343,53 @@ class collectApplianceSystem():
         return orch_return
 
 class collectApplianceBGP():
-    def __init__(self):
-        pass
+    def __init__(self,url,ne_pk,applianceName,key,verify_ssl,interval,debug, Break):
+        self.url = url
+        self.ne_pk = ne_pk
+        self.applianceName = applianceName
+        self.key = key
+        self.verify_ssl = verify_ssl
+        self.interval = interval
+        self.debug = debug
+        self.Break = Break
+        self.orch = Orchestrator(url=self.url, verify_ssl=self.verify_ssl, api_key=self.key )
+        while True:
+            # get a list of all the methods in this class
+            # loops over the list starting at index 1 to bypass __init__
+            # calls the method
+            methodList = inspect.getmembers(self, predicate=inspect.ismethod)
+            for m in range(1, len(methodList)):
+                i = methodList[m][1]()
 
+                logToFile().debug(message=dict({methodList[m][1].__name__ : i}), debug=self.debug) 
+                confirmReturn(func=methodList[m][1].__name__ ,dictionary=i, debug=self.debug) 
+            if self.Break == False:
+                wait(self.interval)
+            else:
+                break
+
+    @errorHandler
+    def _getApplianBGPState(self):
+        orch_return = self.orch.get_appliance_bgp_state(self.ne_pk)
+        bgpNumVrfs.labels(applianceName=self.applianceName).set(orch_return['summary']['num_vrfs']) #Setting Metric
+        bgpProcessState.labels(applianceName=self.applianceName).info({'bgpProcessState' : orch_return['summary']['bgp_state_str']}) #Setting Metric
+        bgpRejectMismatches.labels(applianceName=self.applianceName).set(orch_return['summary']['reject_mismatches']) #Setting Metric
+        bgpNumPeers.labels(applianceName=self.applianceName).set(orch_return['summary']['num_bgp_peers']) #Setting Metric
+        bgpSubsInstalled.labels(applianceName=self.applianceName).set(orch_return['summary']['num_subs_installed']) #Setting Metric
+        bgpOspfRoutes.labels(applianceName=self.applianceName).set(orch_return['summary']['num_ospf_rtes']) #Setting Metric
+        bgpIBGPRoutes.labels(applianceName=self.applianceName).set(orch_return['summary']['num_ibgp_rtes']) #Setting Metric
+        bgpEBGPRoutes.labels(applianceName=self.applianceName).set(orch_return['summary']['num_ebgp_rtes']) #Setting Metric
+
+        for neighbor in orch_return['neighbor']['neighborState']:
+            peer_ip = neighbor['peer_ip']
+            bgpNeighborState.labels(applianceName=self.applianceName, peer_ip=peer_ip).set(neighbor['peer_state']) #Setting Metric
+            bgpNeighborStateStr.labels(applianceName=self.applianceName, peer_ip=peer_ip, asn=neighbor['asn']).info({'bgpNeighborStateStr' : neighbor['peer_state_str']}) #Setting Metric
+            bgpNeighborUptime.labels(applianceName=self.applianceName, peer_ip=peer_ip).set(neighbor['time_established']) #Setting Metric
+            bgpNeighborReceivedPrefix.labels(applianceName=self.applianceName, peer_ip=peer_ip).set(neighbor['rcvd_pfxs']) #Setting Metric
+            bgpNeighborSentPrefix.labels(applianceName=self.applianceName, peer_ip=peer_ip).set(neighbor['sent_pfxs']) #Setting Metric
+
+        return orch_return
+    
 class collectApplianceOSPF():
     def __init__(self):
         pass
