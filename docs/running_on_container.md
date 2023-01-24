@@ -11,11 +11,20 @@ config:
    exporter:
       port: 15693
    silverpeak:
+      orch: orch.silverpeak.cloud
       verify_ssl: True
 
 orchestrator:
    collect: True
-   interval: 30
+   interval: 300
+   
+appliances:
+   edge-1:
+      - {system: true, interval: 120}
+      - {bgp: true, interval: 120} 
+   edge-2:
+      - {system: true, interval: 120}
+      - {bgp: true, interval: 120}
 ~~~~~~~~~~~~~~~~~~~~
 
 Use the following command as an example to map the folder where the vars are located and add additional environment variables to the container.
