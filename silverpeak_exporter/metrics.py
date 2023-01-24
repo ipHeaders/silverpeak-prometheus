@@ -52,3 +52,20 @@ applianceCPU = Gauge('applianceCPU', 'cpu utilization in porcentage for each app
 applianceDiskUsage = Gauge('applianceDiskUsage', 'appliance disk utilization for each mount point',['applianceName','mount','metric'])
 applianceRebootRequiered = Enum('applianceRebootRequiered', 'check with appliance if a reboot is required from changes',['applianceName'], states=['True', 'False'])
 applianceMemory = Gauge('applianceMemory', 'get appliance memory related information',['applianceName','metric'])
+
+#---------#---------#---------#---------#---------#
+# BGP Metrics
+#---------#---------#---------#---------#---------#
+bgpNumVrfs = Gauge('bgpNumVrfs', 'total number of vrf using bgp',['applianceName',])
+bgpProcessState = Info('bgpProcessState', 'state of the bgp process',['applianceName'])
+bgpRejectMismatches = Gauge('bgpRejectMismatches', 'bgp neighbors rejected by a mismatch',['applianceName',])
+bgpNumPeers = Gauge('bgpNumPeers', 'total number of bgp peers',['applianceName',])
+bgpSubsInstalled = Gauge('bgpSubsInstalled', 'total numbers of subnets installed in the bgp process',['applianceName',])
+bgpOspfRoutes = Gauge('bgpOspfRoutes', 'total number of routes originated by OSPF',['applianceName',])
+bgpIBGPRoutes = Gauge('bgpIBGPRoutes', 'total number of routes originated by iBGP',['applianceName',])
+bgpEBGPRoutes = Gauge('bgpEBGPRoutes', 'total number of routes originated by eBGP',['applianceName',])
+bgpNeighborState = Gauge('bgpNeighborState', 'state of bgp neighbor',['applianceName','peer_ip'])
+bgpNeighborStateStr = Info('bgpNeighborStateStr', 'state of bgp neighbor in string',['applianceName','peer_ip','asn'])
+bgpNeighborUptime = Gauge('bgpNeighborUptime', 'uptime of the bgp neighbor',['applianceName','peer_ip'])
+bgpNeighborSentPrefix = Gauge('bgpNeighborSentPrefix', 'total number of prefixes advertised to the neighbor',['applianceName','peer_ip'])
+bgpNeighborReceivedPrefix = Gauge('bgpNeighborReceivedPrefix', 'total number of prefixes received from the neighbor',['applianceName','peer_ip'])
