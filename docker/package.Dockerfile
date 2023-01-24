@@ -20,7 +20,7 @@ ENV SP_ORCH_KEY ""
 ENV SP_ORCH_SSL ""
 ENV SP_FILE_PATH ""
 # Installing the code
-WORKDIR /opt/exporter/silverpeak_exporter
+#WORKDIR /opt/exporter/silverpeak_exporter
 RUN poetry install
 # Creating entrypoint
 ENTRYPOINT ["poetry" , "run", "spexporter"]
