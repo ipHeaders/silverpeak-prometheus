@@ -17,10 +17,10 @@ orchestrator:
    interval: 300 #orchestrator metrics dont change often.
    
 appliances:
-   edge-1:
+   edge-1: # Change name accordingly 
       - {system: true, interval: 120}
       - {bgp: true, interval: 120} 
-   edge-2:
+   edge-2: # Change name accordingly 
       - {system: true, interval: 120}
       - {bgp: true, interval: 120}
 
