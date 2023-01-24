@@ -178,10 +178,11 @@ class collectOrchestratorMetrics():
 def applianceCollector(**kwargs):
     applianceName = kwargs['applianceName']
     ne_pk = kwargs['ne_pk']
+    interval = kwargs['feature']['interval']
 
     if 'system' in kwargs['feature']:
         try:
-            log().info(f'starting system metric collection on {applianceName,ne_pk}')
+            log().info(f'starting system metric collection on {applianceName,ne_pk} every {interval} seconds')
 
             collectApplianceSystem(
             url = kwargs['url'],
@@ -189,7 +190,7 @@ def applianceCollector(**kwargs):
             applianceName = applianceName,
             key = kwargs['key'],
             verify_ssl = kwargs['verify_ssl'],
-            interval = kwargs['feature']['interval'],
+            interval = interval,
             debug = kwargs['debug'],
             Break = kwargs['Break'],
             )
@@ -198,7 +199,7 @@ def applianceCollector(**kwargs):
 
     if 'bgp' in kwargs['feature']:
         try:
-            log().info(f'starting bgp metric collection on {applianceName,ne_pk}')
+            log().info(f'starting bgp metric collection on {applianceName,ne_pk} every {interval} seconds')
 
             collectApplianceBGP(
             url = kwargs['url'],
@@ -206,7 +207,7 @@ def applianceCollector(**kwargs):
             applianceName = applianceName,
             key = kwargs['key'],
             verify_ssl = kwargs['verify_ssl'],
-            interval = kwargs['feature']['interval'],
+            interval = interval,
             debug = kwargs['debug'],
             Break = kwargs['Break'],
             )
