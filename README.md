@@ -31,5 +31,8 @@ Silverpeak/Aruba SD-WAN Prometheus Exporter, this tool is to query the Silverpea
 ### Appliances
 ![alt text](docs/grafana_appliace.png)
 
+### BGP
+![alt text](docs/grafana_bgp.png)
+
 ## Maintainer
 [IPheaders](https://github.com/ipHeaders)
