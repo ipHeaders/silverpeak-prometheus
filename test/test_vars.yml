@@ -20,8 +20,10 @@ appliances:
    edge-1: # Change name accordingly 
       - {system: true, interval: 120}
       - {bgp: true, interval: 120} 
+      - {flows: true, interval: 120} 
    edge-2: # Change name accordingly 
       - {system: true, interval: 120}
       - {bgp: true, interval: 120}
+      - {flows: true, interval: 120} 
 
 
