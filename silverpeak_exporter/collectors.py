@@ -216,7 +216,22 @@ def applianceCollector(**kwargs):
         except Exception as error:
             log().error(f'failed to set argument {error}')
 
+    if 'flows' in kwargs['feature']:
+        try:
+            log().info(f'starting flows metric collection on {applianceName,ne_pk} every {interval} seconds')
 
+            collectApplianceFlows(
+            url = kwargs['url'],
+            ne_pk = ne_pk,
+            applianceName = applianceName,
+            key = kwargs['key'],
+            verify_ssl = kwargs['verify_ssl'],
+            interval = interval,
+            debug = kwargs['debug'],
+            Break = kwargs['Break'],
+            )
+        except Exception as error:
+            log().error(f'failed to set argument {error}')
 
 def getAllAppliances(url,verify_ssl,api_key):
     try:
@@ -394,6 +409,66 @@ class collectApplianceBGP():
 
         return orch_return
     
+
+
 class collectApplianceOSPF():
     def __init__(self):
         pass
+
+
+class collectApplianceFlows():
+    def __init__(self,url,ne_pk,applianceName,key,verify_ssl,interval,debug, Break):
+        self.url = url
+        self.ne_pk = ne_pk
+        self.applianceName = applianceName
+        self.key = key
+        self.verify_ssl = verify_ssl
+        self.interval = interval
+        self.debug = debug
+        self.Break = Break
+        self.orch = Orchestrator(url=self.url, verify_ssl=self.verify_ssl, api_key=self.key )
+        while True:
+            # get a list of all the methods in this class
+            # loops over the list starting at index 1 to bypass __init__
+            # calls the method
+            methodList = inspect.getmembers(self, predicate=inspect.ismethod)
+            for m in range(1, len(methodList)):
+                i = methodList[m][1]()
+
+                logToFile().debug(message=dict({methodList[m][1].__name__ : i}), debug=self.debug) 
+                confirmReturn(func=methodList[m][1].__name__ ,dictionary=i, debug=self.debug) 
+                writeResult(func=list(i.keys())[0], result=i['result'], debug=self.debug)
+            if self.Break == False:
+                wait(self.interval)
+            else:
+                break
+
+    @errorHandler
+    def _getApplianceFlows(self):
+        orch_return = self.orch.get_appliance_flows(self.ne_pk,uptime="term5m")
+
+        activeTotalFlows.labels(applianceName=self.applianceName).set(orch_return['active']['total_flows']) #Setting Metric
+        activeStaleFlows.labels(applianceName=self.applianceName).set(orch_return['active']['stale_flows']) #Setting Metric
+        activeInconsistentFlows.labels(applianceName=self.applianceName).set(orch_return['active']['inconsistent_flows']) #Setting Metric
+        activeFlowsWithIssues.labels(applianceName=self.applianceName).set(orch_return['active']['flows_with_issues']) #Setting Metric
+        activeFlowsOptimized.labels(applianceName=self.applianceName).set(orch_return['active']['flows_optimized']) #Setting Metric
+        activeFlowsWithIgnores.labels(applianceName=self.applianceName).set(orch_return['active']['flows_with_ignores']) #Setting Metric
+        activeFlowsPassthrough.labels(applianceName=self.applianceName).set(orch_return['active']['flows_passthrough']) #Setting Metric
+        activeFlowsManagement.labels(applianceName=self.applianceName).set(orch_return['active']['flows_management']) #Setting Metric
+        activeFlowsAsymmetric.labels(applianceName=self.applianceName).set(orch_return['active']['flows_asymmetric']) #Setting Metric
+        activeFlowsRouteDropped.labels(applianceName=self.applianceName).set(orch_return['active']['flows_route_dropped']) #Setting Metric
+        activeFlowsFirewallDropped.labels(applianceName=self.applianceName).set(orch_return['active']['flows_firewall_dropped']) #Setting Metric
+
+        inactiveTotalFlows.labels(applianceName=self.applianceName).set(orch_return['inactive']['total_flows']) #Setting Metric
+        inactiveStaleFlows.labels(applianceName=self.applianceName).set(orch_return['inactive']['stale_flows']) #Setting Metric
+        inactiveInconsistentFlows.labels(applianceName=self.applianceName).set(orch_return['inactive']['inconsistent_flows']) #Setting Metric
+        inactiveFlowsWithIssues.labels(applianceName=self.applianceName).set(orch_return['inactive']['flows_with_issues']) #Setting Metric
+        inactiveFlowsOptimized.labels(applianceName=self.applianceName).set(orch_return['inactive']['flows_optimized']) #Setting Metric
+        inactiveFlowsWithIgnores.labels(applianceName=self.applianceName).set(orch_return['inactive']['flows_with_ignores']) #Setting Metric
+        inactiveFlowsPassthrough.labels(applianceName=self.applianceName).set(orch_return['inactive']['flows_passthrough']) #Setting Metric
+        inactiveFlowsManagement.labels(applianceName=self.applianceName).set(orch_return['inactive']['flows_management']) #Setting Metric
+        inactiveFlowsAsymmetric.labels(applianceName=self.applianceName).set(orch_return['inactive']['flows_asymmetric']) #Setting Metric
+        inactiveFlowsRouteDropped.labels(applianceName=self.applianceName).set(orch_return['inactive']['flows_route_dropped']) #Setting Metric
+        inactiveFlowsFirewallDropped.labels(applianceName=self.applianceName).set(orch_return['inactive']['flows_firewall_dropped']) #Setting Metric
+
+        return orch_return
