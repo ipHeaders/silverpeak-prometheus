@@ -67,3 +67,31 @@
 | bgpNeighborUptime  | Gauge  | uptime of the bgp neighbor  | 
 | bgpNeighborReceivedPrefix  | Gauge  | total number of prefixes received from the neighbor  | 
 | bgpNeighborSentPrefix  | Gauge  | total number of prefixes advertised to the neighbor  | 
+
+
+## Appliances Flows
+
+| Name  | Type  | Description  |
+| ------------ | ------------ | ------------ |
+| activeTotalFlows  | Gauge  | number of active flows  | 
+| activeStaleFlows  | Gauge  | number of active stale flows  | 
+| activeInconsistentFlows  | Gauge  | number of active inconsistent flows  | 
+| activeFlowsWithIssues  | Gauge  | number of active flows with issues  | 
+| activeFlowsOptimized  | Gauge  | number of active optimized flows  | 
+| activeFlowsWithIgnores  | Gauge  | no description in swagger  | 
+| activeFlowsPassthrough  | Gauge  | number of active passthrough flows  | 
+| activeFlowsManagement  | Gauge  | number of active management flows  | 
+| activeFlowsAsymmetric  | Gauge  | number of active asymmetric flows  | 
+| activeFlowsRouteDropped  | Gauge  | number of active flows dropped due to route  | 
+| activeFlowsFirewallDropped  | Gauge  | number of active flows dropped due to firewall  | 
+| inactiveTotalFlows  | Gauge  | number of inactive flows  | 
+| inactiveStaleFlows  | Gauge  | number of inactive stale flows  | 
+| inactiveInconsistentFlows  | Gauge  | number of inactive inconsistent flows  | 
+| inactiveFlowsWithIssues  | Gauge  | number of inactive flows with issues  | 
+| inactiveFlowsOptimized  | Gauge  | number of inactive optimized flows  | 
+| inactiveFlowsWithIgnores  | Gauge  | no description in swagger  | 
+| inactiveFlowsPassthrough  | Gauge  | number of inactive passthrough flows  | 
+| inactiveFlowsManagement  | Gauge  | number of inactive management flows  | 
+| inactiveFlowsAsymmetric  | Gauge  | number of inactive asymmetric flows  | 
+| inactiveFlowsRouteDropped  | Gauge  | number of inactive flows dropped due to route  | 
+| inactiveFlowsFirewallDropped  | Gauge  | number of inactive flows dropped due to firewall  | 
