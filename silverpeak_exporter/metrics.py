@@ -69,3 +69,32 @@ bgpNeighborStateStr = Info('bgpNeighborStateStr', 'state of bgp neighbor in stri
 bgpNeighborUptime = Gauge('bgpNeighborUptime', 'uptime of the bgp neighbor',['applianceName','peer_ip'])
 bgpNeighborReceivedPrefix = Gauge('bgpNeighborReceivedPrefix', 'total number of prefixes received from the neighbor',['applianceName','peer_ip'])
 bgpNeighborSentPrefix = Gauge('bgpNeighborSentPrefix', 'total number of prefixes advertised to the neighbor',['applianceName','peer_ip'])
+
+
+
+#---------#---------#---------#---------#---------#
+# Flows Metrics
+#---------#---------#---------#---------#---------#
+
+activeTotalFlows = Gauge('activeTotalFlows', 'number of active flows',['applianceName',])
+activeStaleFlows = Gauge('activeStaleFlows', 'number of active stale flows',['applianceName',])
+activeInconsistentFlows = Gauge('activeInconsistentFlows', 'number of active inconsistent flows',['applianceName',])
+activeFlowsWithIssues = Gauge('activeFlowsWithIssues', 'number of active flows with issues',['applianceName',])
+activeFlowsOptimized = Gauge('activeFlowsOptimized', 'number of active optimized flows',['applianceName',])
+activeFlowsWithIgnores = Gauge('activeFlowsWithIgnores', 'no description in swagger',['applianceName',])
+activeFlowsPassthrough = Gauge('activeFlowsPassthrough', 'number of active passthrough flows',['applianceName',])
+activeFlowsManagement = Gauge('activeFlowsManagement', 'number of active management flows',['applianceName',])
+activeFlowsAsymmetric = Gauge('activeFlowsAsymmetric', 'number of active asymmetric flows',['applianceName',])
+activeFlowsRouteDropped = Gauge('activeFlowsRouteDropped', 'number of active flows dropped due to route',['applianceName',])
+activeFlowsFirewallDropped = Gauge('activeFlowsFirewallDropped', 'number of active flows dropped due to firewall',['applianceName',])
+inactiveTotalFlows = Gauge('inactiveTotalFlows', 'number of inactive flows',['applianceName',])
+inactiveStaleFlows = Gauge('inactiveStaleFlows', 'number of inactive stale flows',['applianceName',])
+inactiveInconsistentFlows = Gauge('inactiveInconsistentFlows', 'number of inactive inconsistent flows',['applianceName',])
+inactiveFlowsWithIssues = Gauge('inactiveFlowsWithIssues', 'number of inactive flows with issues',['applianceName',])
+inactiveFlowsOptimized = Gauge('inactiveFlowsOptimized', 'number of inactive optimized flows',['applianceName',])
+inactiveFlowsWithIgnores = Gauge('inactiveFlowsWithIgnores', 'no description in swagger',['applianceName',])
+inactiveFlowsPassthrough = Gauge('inactiveFlowsPassthrough', 'number of inactive passthrough flows',['applianceName',])
+inactiveFlowsManagement = Gauge('inactiveFlowsManagement', 'number of inactive management flows',['applianceName',])
+inactiveFlowsAsymmetric = Gauge('inactiveFlowsAsymmetric', 'number of inactive asymmetric flows',['applianceName',])
+inactiveFlowsRouteDropped = Gauge('inactiveFlowsRouteDropped', 'number of inactive flows dropped due to route',['applianceName',])
+inactiveFlowsFirewallDropped = Gauge('inactiveFlowsFirewallDropped', 'number of inactive flows dropped due to firewall',['applianceName',])
