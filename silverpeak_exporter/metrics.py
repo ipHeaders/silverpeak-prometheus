@@ -39,6 +39,7 @@ totalTunnelCount = Gauge('totalTunnelCount', 'get total tunnel count across all 
 totalCPUs = Gauge('totalCPUs', 'the total amount of CPU on the orchestrator, works only when orch is not running in container',['orchName'])
 loadAverage = Gauge('loadAverage', 'orchestrator load average, works only when orch is not running in container',['orchName'])
 totalMemSize = Gauge('totalMemSize', 'total memory of the server, works only when orch is not running in container',['orchName'])
+maintenaceModeAppliances = Gauge('maintenacModeAppliances', 'appliances currently in maintenance mode',['orchName'])
 #---------#---------#---------#---------#---------#
 # Appliance Metrics
 #---------#---------#---------#---------#---------#

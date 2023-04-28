@@ -179,6 +179,16 @@ class collectOrchestratorMetrics():
         totalTunnelCount.labels(orchName=self.hostname).set(orch_return['totalTunnelCount'])
         return orch_return
 
+    @errorHandler
+    def _getAppliancesInMaintenance(self):
+        orch_return = self.orch.get_maintenance_mode_appliances()
+        supressAlarm = orch_return['suppressAlarm']
+        supressOrch = orch_return['pauseOrchestration']
+        
+        unique = supressAlarm + list(set(supressOrch) - set(supressAlarm))
+        maintenaceModeAppliances.labels(orchName=self.hostname).set(len(unique))
+        return orch_return
+    
 #--------------------------------------------------#
 # Metrics Collections for the Appliances
 #--------------------------------------------------#

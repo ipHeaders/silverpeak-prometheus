@@ -33,6 +33,7 @@
 | totalCPUs| Gauge  | the total amount of CPU on the orchestrator, works only when orch is not running in container  | 
 | loadAverage| Gauge  | orchestrator load average, works only when orch is not running in container  | 
 | totalMemSize| Gauge  | total memory of the server, works only when orch is not running in container  | 
+| maintenaceModeAppliances| Gauge  | appliances currently in maintenance mode  | 
 
 ## Appliances System
 
