@@ -75,6 +75,12 @@ class collectOrchestratorMetrics():
        release.labels(orchName=self.hostname).info({'release' : orch_return['release']}) #Setting Metric
        platform.labels(orchName=self.hostname).info({'platform' : orch_return['platform']}) #Setting Metric
        numActiveUsers.labels(orchName=self.hostname).set(orch_return['numActiveUsers']) #Setting Metric
+
+       if orch_return['platform'] != "DOCKER":
+           totalCPUs.labels(orchName=self.hostname).set(orch_return['numCpus']) #Setting Metric
+           loadAverage.labels(orchName=self.hostname).set(orch_return['loadAverage']) #Setting Metric
+           totalMemSize.labels(orchName=self.hostname).set(orch_return['memSize']) #Setting Metric
+       
        return orch_return
 
     @errorHandler
@@ -445,7 +451,7 @@ class collectApplianceFlows():
 
     @errorHandler
     def _getApplianceFlows(self):
-        orch_return = self.orch.get_appliance_flows(self.ne_pk,uptime="term5m")
+        orch_return = self.orch.get_appliance_flows(self.ne_pk, uptime="term5m")
 
         activeTotalFlows.labels(applianceName=self.applianceName).set(orch_return['active']['total_flows']) #Setting Metric
         activeStaleFlows.labels(applianceName=self.applianceName).set(orch_return['active']['stale_flows']) #Setting Metric
