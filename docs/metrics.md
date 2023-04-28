@@ -30,7 +30,10 @@
 | orchPortalStatus| Enum   | current connectivity status between Orchestrator and Cloud Portal  | 
 | cloudPortalServices| Gauge  | silverpeak cloud portal service and status  | 
 | totalTunnelCount| Gauge  | get total tunnel count across all appliances  | 
-
+| totalCPUs| Gauge  | the total amount of CPU on the orchestrator, works only when orch is not running in container  | 
+| loadAverage| Gauge  | orchestrator load average, works only when orch is not running in container  | 
+| totalMemSize| Gauge  | total memory of the server, works only when orch is not running in container  | 
+| maintenaceModeAppliances| Gauge  | appliances currently in maintenance mode  | 
 
 ## Appliances System
 

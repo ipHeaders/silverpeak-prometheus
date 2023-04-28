@@ -36,7 +36,10 @@ totalOrchSaasApps = Gauge('totalOrchSaasApps', 'count of internet services defin
 orchPortalStatus = Enum('orchPortalStatus', 'current connectivity status between Orchestrator and Cloud Portal',['orchName'], states=['unable to connect', 'connected', 'connecting'])
 cloudPortalServices = Gauge('cloudPortalServices', 'silverpeak cloud portal service and status',['orchName','portalService','status'])
 totalTunnelCount = Gauge('totalTunnelCount', 'get total tunnel count across all appliances',['orchName'])
-
+totalCPUs = Gauge('totalCPUs', 'the total amount of CPU on the orchestrator, works only when orch is not running in container',['orchName'])
+loadAverage = Gauge('loadAverage', 'orchestrator load average, works only when orch is not running in container',['orchName'])
+totalMemSize = Gauge('totalMemSize', 'total memory of the server, works only when orch is not running in container',['orchName'])
+maintenaceModeAppliances = Gauge('maintenacModeAppliances', 'appliances currently in maintenance mode',['orchName'])
 #---------#---------#---------#---------#---------#
 # Appliance Metrics
 #---------#---------#---------#---------#---------#
